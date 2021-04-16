@@ -15,8 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.decorators.cache import never_cache
+from django.views.generic import TemplateView
+
+index = never_cache(TemplateView.as_view(template_name='index.html'))
+
 
 urlpatterns = [
+    path('', index, name='index'),
     path('admin/', admin.site.urls),
     path('api/v1/', include('prepare_be.urls_api_v1'))
 ]
