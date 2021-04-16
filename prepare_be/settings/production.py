@@ -2,7 +2,7 @@
 import dj_database_url
 
 from .base import *
-
+DEBUG = True
 CORS_ALLOW_ALL_ORIGINS = True
 DATABASES = {
     'default': dj_database_url.config(env='HEROKU_POSTGRESQL_GREEN_URL')
