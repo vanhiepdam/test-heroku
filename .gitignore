@@ -25,3 +25,5 @@ __pycache__/
 virtualenv/
 .idea/
 package-lock.json
+*.local
+*.env

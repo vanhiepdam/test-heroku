@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import Modal from "./components/Modal";
 import axios from "axios";
+import routes from "./Routes";
 
-axios.defaults.xsrfCookieName = 'csrftoken'
-axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
 class App extends Component {
 
 	constructor(props) {
@@ -27,7 +29,7 @@ class App extends Component {
 		axios
 			// .get("http://localhost:8000/api/v1/todos/")
 			// Because of proxy in package.json, command be shorten as follows:
-			.get("/api/v1/todos/")
+			.get(routes.routeV1.todo)
 			.then(res => this.setState({ todoList: res.data }))
 			.catch(err => console.log(err));
 	};
@@ -103,14 +105,14 @@ class App extends Component {
 			axios
 				// Because of proxy in package.json, command be shorten as follows:
 				// .put(`http://localhost:8000/api/v1/todos/${item.id}/`, item)
-				.put(`/api/v1/todos/${item.id}/`, item)
+				.put(`${routes.routeV1.todo}/${item.id}/`, item)
 				.then(res => this.refreshList());
 			return;
 		}
 		axios
 			// Because of proxy in package.json, command be shorten as follows:
 			// .post("http://localhost:8000/api/v1/todos/", item)
-			.post("/api/v1/todos/", item)
+			.post(routes.routeV1.todo, item)
 			.then(res => this.refreshList());
 	};
 
@@ -118,7 +120,7 @@ class App extends Component {
 		axios
 			// Because of proxy in package.json, command be shorten as follows:
 			// .delete(`http://localhost:8000/api/v1/todos/${item.id}`)
-			.delete(`/api/v1/todos/${item.id}/`)
+			.delete(`${routes.routeV1.todo}/${item.id}/`)
 			.then(res => this.refreshList());
 	};
 
