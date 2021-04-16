@@ -1,14 +1,9 @@
 # -*- coding: utf-8 -*-
+import dj_database_url
+
 from .base import *
 
 CORS_ALLOW_ALL_ORIGINS = True
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hiep-todo',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
-        'PORT': 5432,
-    }
+    'default': dj_database_url.config()
 }
