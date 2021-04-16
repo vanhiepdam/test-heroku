@@ -29,7 +29,7 @@ class App extends Component {
 		axios
 			// .get("http://localhost:8000/api/v1/todos/")
 			// Because of proxy in package.json, command be shorten as follows:
-			.get(routes.routeV1.todo)
+			.get(`${routes.routeV1.todo}/`)
 			.then(res => this.setState({ todoList: res.data }))
 			.catch(err => console.log(err));
 	};
@@ -105,14 +105,14 @@ class App extends Component {
 			axios
 				// Because of proxy in package.json, command be shorten as follows:
 				// .put(`http://localhost:8000/api/v1/todos/${item.id}/`, item)
-				.put(`${routes.routeV1.todo}/${item.id}/`, item)
+				.put(`${routes.routeV1.todo}/${item.id}`, item)
 				.then(res => this.refreshList());
 			return;
 		}
 		axios
 			// Because of proxy in package.json, command be shorten as follows:
 			// .post("http://localhost:8000/api/v1/todos/", item)
-			.post(routes.routeV1.todo, item)
+			.post(`${routes.routeV1.todo}/`, item)
 			.then(res => this.refreshList());
 	};
 
