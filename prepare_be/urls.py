@@ -13,16 +13,36 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
+
+from django.conf import settings
 from django.contrib import admin
-from django.urls import path, include
+from django.http import HttpResponse
+from django.shortcuts import render_to_response, render
+from django.urls import path, include, re_path
+from django.views import View
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
+from django.template import loader
 
-index = never_cache(TemplateView.as_view(template_name='index.html'))
+
+class ReactAppView(View):
+
+    def get(self, request):
+        try:
+            with open(os.path.join(settings.BASE_DIR, 'build', 'index.html')) as file:
+                return HttpResponse(file.read())
+        except :
+            return HttpResponse(
+                """
+                index.html not found ! build your React app !!
+                """,
+                status=501,
+            )
 
 
 urlpatterns = [
-    path('', index, name='index'),
+    re_path('^$', ReactAppView.as_view(), name='index'),
     path('admin/', admin.site.urls),
     path('api/v1/', include('prepare_be.urls_api_v1'))
 ]

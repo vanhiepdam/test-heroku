@@ -17,7 +17,7 @@ class App extends Component {
 				description: "",
 				completed: false
 			},
-			todoList: []
+			todoList: [],
 		};
 	}
 
