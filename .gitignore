@@ -26,4 +26,4 @@ virtualenv/
 .idea/
 package-lock.json
 *.local
-*.env
+*.env.*
